@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css?family=Mukta+Malar");
+body {
+  background-color: #031634;
+  color: #031634;
+  font-family: 'Mukta Malar', sans-serif; }
+
+.top-menu-container {
+  background: #CDB380;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  margin: auto;
+  width: 330px; }
+
+.menu-btn {
+  background-color: #036564;
+  border-radius: 3px;
+  color: #E8DDCB;
+  cursor: pointer;
+  display: inline-block;
+  margin: 10px 0 0 15px;
+  padding: 5px;
+  text-align: center;
+  width: 80px; }
+  .menu-btn:hover {
+    background-color: #047978; }
+
+.game-board {
+  width: 750px;
+  height: 525px;
+  margin: auto;
+  padding: 15px;
+  background-color: #CDB380;
+  border-radius: 15px; }
+
+.game-space {
+  background-color: #E8DDCB;
+  border-top: 1px solid #CDB380;
+  border-left: 1px solid #CDB380;
+  float: left;
+  height: 14px;
+  width: 14px; }
+
+.clearfix::after {
+  display: block;
+  content: "";
+  clear: both; }
+
+.generation-counter {
+  float: right;
+  text-align: right;
+  margin: 10px 15px 0 0;
+  font-size: 1.35em; }
+
+.young {
+  background-color: #036564; }
+
+.old {
+  background-color: #033649; }

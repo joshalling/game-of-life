@@ -1,0 +1,75 @@
+$terraTerra: #E8DDCB;
+$terra: #CDB380;
+$acqua: #036564;
+$acquaProfonda: #033649;
+$abisso: #031634;
+
+@import url('https://fonts.googleapis.com/css?family=Mukta+Malar');
+
+body {
+  background-color: $abisso;
+  color: $abisso;
+  font-family: 'Mukta Malar', sans-serif;
+}
+
+.top-menu-container {
+  background: $terra;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  margin: auto;
+  width: 330px;
+  
+}
+.menu-btn {
+  background-color: $acqua;
+  border-radius: 3px;
+  color: $terraTerra;
+  cursor: pointer;
+  display: inline-block;
+  margin: 10px 0 0 15px;
+  padding: 5px;
+  text-align: center;
+  width: 80px;
+  &:hover {
+    background-color: lighten( $acqua, 4% );
+  }
+}
+
+.game-board {
+  width: 750px;
+  height: 525px;
+  margin: auto;
+  padding: 15px;
+  background-color: $terra;
+  border-radius: 15px;
+}
+
+.game-space {
+  background-color: $terraTerra;
+  border-top: 1px solid $terra;
+  border-left: 1px solid $terra;
+  float: left;
+  height: 14px;
+  width: 14px;
+}
+
+.clearfix::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+
+.generation-counter {
+  float: right;
+  text-align: right;
+  margin: 10px 15px 0 0;
+  font-size: 1.35em;
+}
+
+.young {
+  background-color: $acqua;
+}
+
+.old {
+  background-color: $acquaProfonda;
+}
