@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
 class App extends React.Component
@@ -28,7 +27,7 @@ class App extends React.Component
         let spaces = document.getElementsByClassName('game-space');
         for (let i = 0; i < spaces.length; i++) {
             let space = spaces.item(i);
-            let spaceId = parseInt(space.id);
+            let spaceId = parseInt(space.id, 10);
             let neighbors = this.GameBox.prototype.getNeighbors(spaceId);
 
             if (space.classList.contains('alive')) {
