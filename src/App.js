@@ -3,6 +3,15 @@ import './App.css';
 
 class App extends React.Component
 {
+    constructor(props) {
+        super(props);
+
+        this.getNeighbors = this.getNeighbors.bind(this);
+        this.passGeneration = this.passGeneration.bind(this);
+    }
+    componentDidMount() {
+        this.randomizeSpaces();
+    }
 
     getNeighbors(spaceId)
     {
@@ -27,8 +36,8 @@ class App extends React.Component
         let spaces = document.getElementsByClassName('game-space');
         for (let i = 0; i < spaces.length; i++) {
             let space = spaces.item(i);
-            let spaceId = parseInt(space.id, 10);
-            let neighbors = this.GameBox.prototype.getNeighbors(spaceId);
+            let spaceId = parseInt(space.id);
+            let neighbors = this.getNeighbors(spaceId);
 
             if (space.classList.contains('alive')) {
                 if (neighbors > 1 && neighbors < 4) {
@@ -42,8 +51,8 @@ class App extends React.Component
                 space.classList.add('born', 'young');
             }
         }
-      
-        this.GameBox.prototype.updateBoard();
+
+        this.updateBoard();
     }
 
     randomizeSpaces()
@@ -55,14 +64,14 @@ class App extends React.Component
             }
         }
     }
-  
-    updateBoard() 
-    {        
+
+    updateBoard()
+    {
         let bornSpaces = document.getElementsByClassName('born');
         let bornLength = bornSpaces.length;
         let dyingSpaces = document.getElementsByClassName('dying');
         let dyingLength = dyingSpaces.length;
-      
+
         for (let i = 0; i < bornLength; i++) {
             bornSpaces.item(0).classList.add('alive');
             bornSpaces.item(0).classList.remove('born');
@@ -78,7 +87,9 @@ class App extends React.Component
     {
         return (
             <div>
-                <TopMenu playGame={this.playGame} clearBoard={this.clearBoard}/>
+                <TopMenu updateBoard={this.updateBoard}
+                         randomizeSpaces={this.randomizeSpaces}
+                         passGeneration={this.passGeneration} />
                 <GameBoard/>
             </div>
         );
@@ -87,11 +98,19 @@ class App extends React.Component
 
 class TopMenu extends React.Component
 {
+    constructor(props) {
+        super(props);
+
+        this.intervalId = false;
+
+        this.clearBoard = this.clearBoard.bind(this);
+        this.pauseGame = this.pauseGame.bind(this);
+        this.playGame = this.playGame.bind(this);
+    }
 
     clearBoard()
     {
-        this.TopMenu.prototype.pauseGame();
-        this.GameBox.prototype.updateBoard();
+        this.pauseGame();
         let livingSpaces = document.getElementsByClassName('alive');
         let length = livingSpaces.length;
         for (let i = 0; i < length; i++) {
@@ -103,18 +122,18 @@ class TopMenu extends React.Component
     {
         let livingSpaces = document.getElementsByClassName('alive');
         if (livingSpaces.length === 0) {
-            this.GameBox.prototype.randomizeSpaces();
+            this.props.randomizeSpaces();
         }
-        if (!window.intervalId) {
-            window.intervalId = setInterval(this.GameBox.prototype.passGeneration, 100);
+        if (!this.intervalId) {
+            this.intervalId = setInterval(this.props.passGeneration, 100);
         }
 
     }
 
     pauseGame()
     {
-        clearInterval(window.intervalId);
-        window.intervalId = false;
+        clearInterval(this.intervalId);
+        this.intervalId = false;
     }
 
     render()
@@ -122,7 +141,7 @@ class TopMenu extends React.Component
         return (
             <div className="top-menu-container text-center">
                 <div className="menu-btn" onClick={this.playGame}>Play</div>
-                <div className="menu-btn" onClick={ () => this.pauseGame()}>Pause</div>
+                <div className="menu-btn" onClick={this.pauseGame}>Pause</div>
                 <div className="menu-btn" onClick={this.clearBoard}>Clear</div>
             </div>
         );
@@ -161,5 +180,6 @@ class GameSpace extends React.Component
         );
     }
 }
+
 
 export default App;
